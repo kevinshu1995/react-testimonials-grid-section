@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import Clsx from "clsx";
 
 type Person = {
@@ -25,22 +25,21 @@ function Avatar({ img, name }: Person) {
             </div>
             <div className="flex flex-col justify-center">
                 <h2>{name}</h2>
-                <p className="text-light-gray">Verified Graduate</p>
+                <p className="text-opacity-50">Verified Graduate</p>
             </div>
         </>
     );
 }
 
-function Card({ user, className, ...props }: { user: User; className: string }) {
+function Card({ className, children }: { className: string; children: ReactElement }) {
     return (
-        <article className={Clsx("p-8 space-y-6", "shadow-offset rounded-2xl", className)}>
-            <header className="flex items-center space-x-4">
-                <Avatar {...user.person} />
-            </header>
-            <main className="space-y-6">
-                <h3 className="text-2xl">{user.quote}</h3>
-                <p className="text-lg">{user.content}</p>
-            </main>
+        <article
+            className={Clsx("p-8 space-y-4", "shadow-offset rounded-2xl", className)}
+            style={{
+                backgroundColor: "var(--card-background)",
+            }}
+        >
+            {children}
         </article>
     );
 }
@@ -54,27 +53,10 @@ function App() {
             .then(setUsers);
     }, [setUsers]);
 
-    const twColors: string[] = [
-        "bg-moderate-violet",
-        "bg-very-dark-grayish-blue",
-        "bg-very-dark-blackish-blue",
-        "bg-light-gray",
-        "bg-light-grayish-blue",
-    ];
-
     return (
-        <section className="min-h-screen flex flex-col items-center justify-center">
-            <div className="flex space-x-2 p-4">
-                {twColors.map(color => {
-                    return (
-                        <div key={color} className={Clsx("p-2", color)}>
-                            {color}
-                        </div>
-                    );
-                })}
-            </div>
-            <div
-                className="flex flex-col lg:grid gap-4"
+        <section className="min-h-screen max-w-screen-xl flex flex-col justify-center mx-auto px-6 pt-16 lg:pt-0">
+            <ul
+                className="flex flex-col lg:grid gap-6 card-group"
                 style={{
                     gridTemplateAreas: `
                         'A A B E'
@@ -82,10 +64,26 @@ function App() {
                     `,
                 }}
             >
-                {users.map(user => (
-                    <Card key={user.person.name} className="" user={user} />
+                {users.map((user, index) => (
+                    <li
+                        key={user.person.name}
+                        className="w-full"
+                        style={{
+                            gridArea: `${String.fromCodePoint(65 + index)}`,
+                        }}
+                    >
+                        <Card className="h-full">
+                            <>
+                                <header className="flex items-center space-x-4">
+                                    <Avatar {...user.person} />
+                                </header>
+                                <h3 className="text-xl leading-6">{user.quote}</h3>
+                                <p className="text-opacity-70">"{user.content}"</p>
+                            </>
+                        </Card>
+                    </li>
                 ))}
-            </div>
+            </ul>
         </section>
     );
 }
