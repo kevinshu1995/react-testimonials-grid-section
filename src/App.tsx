@@ -15,17 +15,16 @@ function Avatar({ img, name }: Person) {
     return (
         <>
             <div
-                className={Clsx(
-                    "border-gray-200",
-                    "rounded-full border-4 overflow-hidden",
-                    "inline-block w-10 h-10"
-                )}
+                className={Clsx("rounded-full border-2 overflow-hidden", "inline-block w-10 h-10")}
+                style={{
+                    borderColor: "var(--card-border)",
+                }}
             >
                 <img className="w-full h-full" src={img} />
             </div>
             <div className="flex flex-col justify-center">
                 <h2>{name}</h2>
-                <p className="text-opacity-50">Verified Graduate</p>
+                <p className="opacity-50 text-xs">Verified Graduate</p>
             </div>
         </>
     );
@@ -54,7 +53,8 @@ function App() {
     }, [setUsers]);
 
     return (
-        <section className="min-h-screen max-w-screen-xl flex flex-col justify-center mx-auto px-6 pt-16 lg:pt-0">
+        <section className="min-h-screen max-w-screen-xl flex flex-col justify-center mx-auto px-6 py-16">
+            <h1 className="sr-only">Testimonials Grid Section</h1>
             <ul
                 className="flex flex-col lg:grid gap-6 card-group"
                 style={{
@@ -78,7 +78,7 @@ function App() {
                                     <Avatar {...user.person} />
                                 </header>
                                 <h3 className="text-xl leading-6">{user.quote}</h3>
-                                <p className="text-opacity-70">"{user.content}"</p>
+                                <p className="opacity-70">"{user.content}"</p>
                             </>
                         </Card>
                     </li>

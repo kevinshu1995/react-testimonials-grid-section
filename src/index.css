@@ -16,21 +16,26 @@ body {
 
 .card-group li:nth-of-type(1) {
     @apply text-light-grayish-blue;
-    --card-background: hsl(217, 19%, 35%);
+    --card-background: hsl(263, 55%, 52%);
+    --card-border: hsl(264, 82%, 70%);
 }
 .card-group li:nth-of-type(2) {
     @apply text-light-grayish-blue;
-    --card-background: hsl(263, 55%, 52%);
+    --card-background: hsl(217, 19%, 35%);
+    --card-border: hsla(217, 19%, 35%);
 }
 .card-group li:nth-of-type(3) {
     @apply text-very-dark-blackish-blue;
     --card-background: white;
+    --card-border: white;
 }
 .card-group li:nth-of-type(4) {
     @apply text-light-grayish-blue;
     --card-background: hsl(219, 29%, 14%);
+    --card-border: hsl(264, 82%, 70%);
 }
 .card-group li:nth-of-type(5) {
     @apply text-very-dark-blackish-blue;
     --card-background: white;
+    --card-border: white;
 }
