@@ -47,7 +47,7 @@ function App() {
     const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
-        fetch("/src/data.json")
+        fetch("/data.json")
             .then(res => res.json() as Promise<User[]>)
             .then(setUsers);
     }, [setUsers]);
