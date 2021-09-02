@@ -20,7 +20,7 @@ function Avatar({ img, name }: Person) {
                     borderColor: "var(--card-border)",
                 }}
             >
-                <img className="w-full h-full" src={img} />
+                <img className="w-full h-full" src={img} alt={`${name}'s avatar`} />
             </div>
             <div className="flex flex-col justify-center">
                 <h2>{name}</h2>
@@ -30,10 +30,10 @@ function Avatar({ img, name }: Person) {
     );
 }
 
-function Card({ className, children }: { className: string; children: ReactElement }) {
+function Card({ children }: { children: ReactElement }) {
     return (
         <article
-            className={Clsx("p-8 space-y-4", "shadow-offset rounded-2xl", className)}
+            className={Clsx("h-full px-8 py-10 relative", "shadow-offset rounded-2xl")}
             style={{
                 backgroundColor: "var(--card-background)",
             }}
@@ -72,13 +72,22 @@ function App() {
                             gridArea: `${String.fromCodePoint(65 + index)}`,
                         }}
                     >
-                        <Card className="h-full">
+                        <Card>
                             <>
-                                <header className="flex items-center space-x-4">
-                                    <Avatar {...user.person} />
-                                </header>
-                                <h3 className="text-xl leading-6">{user.quote}</h3>
-                                <p className="opacity-70">"{user.content}"</p>
+                                <div className="space-y-4 relative z-20">
+                                    <header className="flex items-center space-x-4">
+                                        <Avatar {...user.person} />
+                                    </header>
+                                    <h3 className="text-xl leading-6">{user.quote}</h3>
+                                    <p className="opacity-70">"{user.content}"</p>
+                                </div>
+                                {index === 0 && (
+                                    <img
+                                        className="z-10 absolute top-0 right-8 lg:right-20"
+                                        src="/images/bg-pattern-quotation.svg"
+                                        alt="background quotation"
+                                    />
+                                )}
                             </>
                         </Card>
                     </li>
